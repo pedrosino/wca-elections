@@ -1,26 +1,15 @@
 import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
-const HomePage = ({user}) => {
-  let userDataDiv = null;
-  if(user) {
-    let wcaUser = user.services.worldcubeassociation;
-    userDataDiv = (
-      <div>
-        {wcaUser.name} {wcaUser.wca_id}
-      </div>
-    );
-  }
+const HomePage = ({}) => {
   return (
     <div className="container">
-      Hello, homepage!
-      {userDataDiv}
+      Hello, world!
     </div>
   );
 };
 
 export default HomeContainer = createContainer(props => {
   return {
-    user: Meteor.user(),
   };
 }, HomePage);
