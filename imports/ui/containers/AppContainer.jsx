@@ -1,15 +1,18 @@
 import React from 'react';
-import BlazeToReact from '/imports/ui/BlazeToReact';
+import { IndexLink, Link } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
 
-const App = ({content}) => (
+import BlazeToReact from '/imports/ui/BlazeToReact';
+import NavTab from '/imports/ui/NavTab';
+
+const App = ({children}) => (
   <div>
     <Navbar />
-    {content}
+    {children}
   </div>
 );
 
-const Navbar = () => (
+const Navbar = ({}) => (
   <nav className="navbar navbar-default navbar-static-top">
     <div className="container-fluid">
       <div className="navbar-header">
@@ -23,6 +26,11 @@ const Navbar = () => (
       </div>
 
       <div className="collapse navbar-collapse">
+        <ul className="nav navbar-nav">
+          <NavTab to="/" onlyActiveOnIndex={true}>Home</NavTab>
+          <NavTab to="/blog">Blog</NavTab>
+        </ul>
+
         <BlazeToReact wrapperTag="ul" wrapperClass="nav navbar-nav navbar-right" blazeTemplate="_loginButtons" /> 
       </div>
     </div>
