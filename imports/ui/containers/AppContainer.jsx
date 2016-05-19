@@ -22,13 +22,13 @@ const Navbar = ({}) => (
           <span className="icon-bar"></span>
           <span className="icon-bar"></span>
         </button>
-        <a className="navbar-brand" href="#">WCA Elections</a>
+        <Link to="/" className="navbar-brand">WCA Elections</Link>
       </div>
 
       <div className="collapse navbar-collapse">
         <ul className="nav navbar-nav">
           <NavTab to="/" onlyActiveOnIndex={true}>Home</NavTab>
-          <NavTab to="/blog">Blog</NavTab>
+          <NavTab to="/vote">Vote</NavTab>
         </ul>
 
         <BlazeToReact wrapperTag="ul" wrapperClass="nav navbar-nav navbar-right" blazeTemplate="_loginButtons" /> 

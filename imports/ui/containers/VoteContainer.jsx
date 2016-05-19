@@ -1,14 +1,14 @@
 import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
-const BlogPage = ({}) => (
+const VotePage = ({}) => (
   <div className="container">
-    Hello, blogpage!
+    Hello, voter!
   </div>
 );
 
-export default BlogContainer = createContainer(props => {
+export default VoteContainer = createContainer(props => {
   return {
     user: Meteor.user(),
   };
-}, BlogPage);
+}, VotePage);
