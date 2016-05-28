@@ -24,10 +24,10 @@ class Candidate extends React.Component {
     return (
       <div style={{padding: '10px'}}>
         <h3>{this.props.name}</h3>
-        <div>
-          <div style={{display: 'inline-block', paddingLeft: '5%', paddingRight: '5%', backgroundColor: this.state.vote === 1 ? 'grey' : 'white'}} onClick={() => this.vote(1)}>Yes</div>
-          <div style={{display: 'inline-block', paddingLeft: '5%', paddingRight: '5%', backgroundColor: this.state.vote === 0 ? 'grey' : 'white'}} onClick={() => this.vote(0)}>Neutral</div>
-          <div style={{display: 'inline-block', paddingLeft: '5%', paddingRight: '5%', backgroundColor: this.state.vote === -1 ? 'grey' : 'white'}} onClick={() => this.vote(-1)}>No</div>
+        <div class='btn-group' role='group' aria-label='...'>
+          <button type='button' className={`btn btn-default ${this.state.vote === 1 ? 'active' : ''}`} onClick={() => this.vote(1)}>Yes</button>
+          <button type='button' className={`btn btn-default ${this.state.vote === 0 ? 'active' : ''}`} onClick={() => this.vote(0)}>Neutral</button>
+          <button type='button' className={`btn btn-default ${this.state.vote === -1 ? 'active' : ''}`} onClick={() => this.vote(-1)}>No</button>
         </div>
       </div>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import Candidate from './candidate' 
+import { createContainer } from 'meteor/react-meteor-data';
 
 class CandidateList extends React.Component {
   render () {
@@ -14,4 +15,8 @@ class CandidateList extends React.Component {
   }
 }
 
-export default CandidateList;
+export default createContainer(props => {
+  return {
+    user: Meteor.user(),
+  };
+}, CandidateList);
