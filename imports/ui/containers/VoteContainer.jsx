@@ -1,8 +1,9 @@
 import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import CandidateList from '../components/candidate-list' 
+import CandidateList from '../components/candidate-list';
+import { Votes } from '/imports/collections';
 
-const Candidates = require('../../candidates');
+import Candidates from '../../candidates';
 
 class VotePage extends React.Component {
   logIn(e) {
@@ -14,7 +15,7 @@ class VotePage extends React.Component {
   }
 
   render() {
-    let { user } = this.props;
+    let { user, votes } = this.props;
 
     if(!user) {
       return (
@@ -30,7 +31,7 @@ class VotePage extends React.Component {
           Your WCA ID is {wcaUser.wca_id}.
 
           <h2>Candidates:</h2>
-          <CandidateList candidates={Candidates}/>
+          <CandidateList initialVotes={votes} candidates={Candidates}/>
         </div>
       );
     }
@@ -40,9 +41,11 @@ class VotePage extends React.Component {
 export default VoteContainer = createContainer(props => {
   const votesHandle = Meteor.subscribe('myVotes');
   const loading = !votesHandle.ready();
+  const votes = Meteor.user() ? Votes.findOne({userId: Meteor.userId()}).votes : [];
 
   return {
     loading,
+    votes: votes,
     user: Meteor.user(),
   };
 }, VotePage);

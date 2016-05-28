@@ -4,8 +4,13 @@ class Candidate extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      vote: undefined // 1,0,-1
+      vote: props.initialVote // 1,0,-1
     };
+  }
+
+  componentWillReceiveProps (props) {
+    console.log(8, this.state.vote, props);
+    this.state.vote = props.initialVote;
   }
 
   vote (vote) {
@@ -15,7 +20,7 @@ class Candidate extends React.Component {
     });
 
     Meteor.call('vote', {
-      name: this.props.name,
+      candidate: this.props.candidate,
       vote
     });
   }

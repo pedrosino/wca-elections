@@ -1,16 +1,25 @@
 import { Votes } from '/imports/collections';
 
 Meteor.methods({
-  'vote' (vote) {
-    console.log(this.userId, vote)
-    Votes.upsert({
-      userId: this.userId,
-    }, {
-      userId: this.userId,
-      votes: [{
-        name: vote.name,
-        vote: vote.vote
-      }]
+  'vote' (userVote) {
+    console.log(this.userId, userVote)
+
+    let vote = Votes.findOne({
+      userId: this.userId
     });
+
+    console.log(11, !!vote);
+    if (vote) {
+      vote.votes[userVote.candidate.id] = userVote.vote
+      Votes.update(vote._id, vote);
+    } else {
+      Votes.insert({
+        userId: this.userId,
+        votes: [{
+          name: userVote.candidate.name,
+          vote: userVote.candidate.vote
+        }]
+      });
+    }
   }
 });
