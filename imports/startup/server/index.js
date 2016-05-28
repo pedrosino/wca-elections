@@ -1,3 +1,3 @@
-import './votes';
+import '/imports/collections';
 import './publications';
 import './methods';

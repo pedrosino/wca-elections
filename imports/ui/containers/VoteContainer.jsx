@@ -38,7 +38,11 @@ class VotePage extends React.Component {
 };
 
 export default VoteContainer = createContainer(props => {
+  const votesHandle = Meteor.subscribe('myVotes');
+  const loading = !votesHandle.ready();
+
   return {
+    loading,
     user: Meteor.user(),
   };
 }, VotePage);

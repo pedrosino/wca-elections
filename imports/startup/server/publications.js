@@ -1,3 +1,5 @@
+import { Votes } from '/imports/collections';
+
 Meteor.publish(null, function() {
   if(!this.userId) {
     return [];
@@ -10,4 +12,11 @@ Meteor.publish(null, function() {
       'services.worldcubeassociation': 1,
     }
   });
+});
+
+Meteor.publish('myVotes', function() {
+  if(!this.userId) {
+    return [];
+  }
+  return Votes.find({ userId: this.userId });
 });
