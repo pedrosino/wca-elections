@@ -2,7 +2,7 @@ Meteor.methods({
   'vote' (vote) {
     console.log(this.userId, vote)
     Votes.upsert({
-      _id: this.userId,
+      userId: this.userId,
     }, {
       votes: [{
         name: vote.name,
