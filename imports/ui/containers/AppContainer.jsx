@@ -34,7 +34,7 @@ const Navbar = ({}) => (
         <BlazeToReact wrapperTag="ul" wrapperClass="nav navbar-nav navbar-right" blazeTemplate="_loginButtons" /> 
       </div>
     </div>
-  </nav>
+  </nav>  
 );
 
 export default AppContainer = createContainer(props => {

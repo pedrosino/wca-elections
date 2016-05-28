@@ -1,12 +1,15 @@
 import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
+import CandidateList from '../components/candidate-list' 
+
+const Candidates = require('../../candidates');
 
 class VotePage extends React.Component {
   logIn(e) {
     // Rather than calling Meteor.loginWithWorldcubeassociation, we can just
     // click the login button which we know must exist. See
     //  https://github.com/ianmartorell/meteor-accounts-ui-bootstrap-3/blob/443e852cb0471fa83c090119e64d10b9a5eb9355/login_buttons_single.js#L23-L33
-    e.preventDefault();
+    e.preventDefault( );
     $('.login-button').click();
   }
 
@@ -25,6 +28,9 @@ class VotePage extends React.Component {
         <div className="container">
           Hello, {wcaUser.name}!
           Your WCA ID is {wcaUser.wca_id}.
+
+          <h2>Candidates:</h2>
+          <CandidateList candidates={Candidates}/>
         </div>
       );
     }
