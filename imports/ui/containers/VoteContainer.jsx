@@ -2,6 +2,7 @@ import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import CandidateList from '../components/candidate-list';
 import { Votes } from '/imports/collections';
+import { throwUnlessUser, canVote } from '/imports/permissions';
 
 import Candidates from '../../candidates';
 
@@ -21,6 +22,12 @@ class VotePage extends React.Component {
       return (
         <div className="container">
           You must <a href="#" onClick={this.logIn}>log in</a> order to vote.
+        </div>
+      );
+    } else if (!canVote(user)) {
+      return (
+        <div className="container">
+          You can not vote.
         </div>
       );
     } else {
