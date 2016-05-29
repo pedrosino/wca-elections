@@ -38,7 +38,7 @@ class VotePage extends React.Component {
           Your WCA ID is {wcaUser.wca_id}.
 
           <h2>Candidates:</h2>
-          <CandidateList initialVotes={votes} candidates={Candidates}/>
+          <CandidateList votes={votes} candidates={Candidates}/>
         </div>
       );
     }
