@@ -1,18 +1,18 @@
 export default [
   {
     name: "Keaton Ellis",
-    id: 0,
+    id: 'abc',
   },
   { 
     name: "Jeremy Fly",
-    id: 1,
+    id: 'def',
   },
   {
     name: "Kit Clement",
-    id: 2,
+    id: 'ghi',
   },
   {
     name: 'James LaChance',
-    id: 3,
+    id: 'jkl',
   },
 ];

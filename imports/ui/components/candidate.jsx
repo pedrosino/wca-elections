@@ -13,26 +13,26 @@ class Candidate extends React.Component {
     this.state.vote = props.initialVote;
   }
 
-  vote (vote) {
-    console.log(vote);
+  vote (preference) {
+    console.log(preference);
     this.setState({
-      vote: vote
+      vote: preference
     });
 
     Meteor.call('vote', {
-      candidate: this.props.candidate,
-      vote
+      candidateId: this.props.candidate.id,
+      preference,
     });
   }
 
   render () {
     return (
       <div style={{padding: '10px'}}>
-        <h3>{this.props.name}</h3>
+        <h3>{this.props.candidate.name}</h3>
         <div className='btn-group' role='group' aria-label='...'>
-          <button type='button' className={`btn btn-default ${this.state.vote === 1 ? 'active' : ''}`} onClick={() => this.vote(1)}>Yes</button>
-          <button type='button' className={`btn btn-default ${this.state.vote === 0 ? 'active' : ''}`} onClick={() => this.vote(0)}>Neutral</button>
-          <button type='button' className={`btn btn-default ${this.state.vote === -1 ? 'active' : ''}`} onClick={() => this.vote(-1)}>No</button>
+          <button type='button' className={`btn btn-default ${this.state.vote === 'yes' ? 'active' : ''}`} onClick={() => this.vote('yes')}>Yes</button>
+          <button type='button' className={`btn btn-default ${this.state.vote === 'neutral' ? 'active' : ''}`} onClick={() => this.vote('neutral')}>Neutral</button>
+          <button type='button' className={`btn btn-default ${this.state.vote === 'no' ? 'active' : ''}`} onClick={() => this.vote('no')}>No</button>
         </div>
       </div>
     );
