@@ -2,7 +2,6 @@ import React from 'react';
 
 class Candidate extends React.Component {
   vote (preference) {
-    console.log(preference);
     Meteor.call('vote', {
       candidateId: this.props.candidate.id,
       preference,
