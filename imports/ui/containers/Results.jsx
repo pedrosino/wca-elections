@@ -8,6 +8,7 @@ import _ from 'lodash';
 export default Results = createContainer(props => {
   const resultsHandle = Meteor.subscribe('results');
 
+  let user = Meteor.user();
   let votes = Votes.find({}).fetch().filter(vote => vote.isComplete());
 
   let results = candidates.map(candidate => {
@@ -25,5 +26,6 @@ export default Results = createContainer(props => {
 
   return {
     results,
+    user,
   };
 }, ResultsPage);
