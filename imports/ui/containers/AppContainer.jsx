@@ -29,12 +29,13 @@ const Navbar = ({}) => (
         <ul className="nav navbar-nav">
           <NavTab to="/" onlyActiveOnIndex={true}>Home</NavTab>
           <NavTab to="/vote">Vote</NavTab>
+          <NavTab to="/results">Results</NavTab>
         </ul>
 
         <BlazeToReact wrapperTag="ul" wrapperClass="nav navbar-nav navbar-right" blazeTemplate="_loginButtons" /> 
       </div>
     </div>
-  </nav>  
+  </nav>
 );
 
 export default AppContainer = createContainer(props => {
