@@ -4,7 +4,8 @@ import CandidateList from '../components/candidate-list';
 import { Vote, Votes } from '/imports/collections';
 import { throwUnlessUser, canVote } from '/imports/permissions';
 
-import { candidates } from '/imports/parsed-election-config';
+import moment from 'moment';
+import { candidates, endMoment } from '/imports/parsed-election-config';
 
 class VotePage extends React.Component {
   logIn(e) {
@@ -37,9 +38,14 @@ class VotePage extends React.Component {
       if (!vote.isComplete()) {
         messages.push({
           type: 'danger',
-          text: 'You have not voted for all candidates. Finish doing this because you suck.'
+          text: 'You have not voted for all candidates. Your vote will not be counted until you have voted for everyone.',
         });
       }
+
+      messages.push({
+        type: "info",
+        text: `The election ends ${endMoment.fromNow()} on ${endMoment.format()}`,
+      });
 
       return (
         <div className="container">
