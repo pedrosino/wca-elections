@@ -4,7 +4,7 @@ import CandidateList from '../components/candidate-list';
 import { Vote, Votes } from '/imports/collections';
 import { throwUnlessUser, canVote } from '/imports/permissions';
 
-import Candidates from '../../candidates';
+import { candidates } from '/imports/parsed-election-config';
 
 class VotePage extends React.Component {
   logIn(e) {
@@ -51,7 +51,7 @@ class VotePage extends React.Component {
             </div>
           )}
           <h2>Candidates:</h2>
-          <CandidateList votes={vote.votes} candidates={Candidates}/>
+          <CandidateList votes={vote.votes} candidates={candidates}/>
         </div>
       );
     }

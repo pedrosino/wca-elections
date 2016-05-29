@@ -1,7 +1,7 @@
 import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import ResultsPage from '/imports/ui/pages/Results.jsx';
-import candidates from '/imports/candidates';
+import { candidates } from '/imports/parsed-election-config';
 import { Votes } from '/imports/collections';
 import _ from 'lodash';
 

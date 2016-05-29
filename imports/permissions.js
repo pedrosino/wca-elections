@@ -1,6 +1,20 @@
 import { Meteor } from 'meteor/meteor';
+import moment from 'moment';
+import { startMoment, endMoment } from '/imports/parsed-election-config';
+
+function electionHasEnded() {
+  return moment().isAfter(endMoment);
+}
+
+function electionUpcoming() {
+  return moment().isBefore(startMoment);
+}
 
 export const canVote = function(user) {
+  if(electionUpcoming() || electionHasEnded()) {
+    return false;
+  }
+
   let wca = user.services.worldcubeassociation;
   return (
     wca.delegate_status === "board_member" ||
@@ -11,7 +25,7 @@ export const canVote = function(user) {
 };
 
 export const canViewResults = function(user) {
-  return true;
+  return electionHasEnded();
 }
 
 export const throwUnlessUser = function(canUserDoFunc, userId) {

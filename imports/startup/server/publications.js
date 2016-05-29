@@ -23,7 +23,10 @@ Meteor.publish('myVotes', function() {
 });
 
 Meteor.publish('results', function() {
-  throwUnlessUser(canViewResults, this.userId);
+  let user = Meteor.users.find(this.userId);
+  if(!canViewResults(user)) {
+    return [];
+  }
 
   return Votes.find({});
 });

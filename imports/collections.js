@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import candidates from '/imports/candidates';
+import { candidates } from '/imports/parsed-election-config';
 
 export const Votes = new Mongo.Collection('Votes', {
   transform(doc) {
