@@ -40,6 +40,11 @@ class VotePage extends React.Component {
           type: 'danger',
           text: 'You have not voted for all candidates. Your vote will not be counted until you have voted for everyone.',
         });
+      } else {
+        messages.push({
+          type: 'success',
+          text: 'Your vote has been stored in our database! For your convinience, you can change your vote until the election deadline has passed.',
+        });
       }
 
       messages.push({
