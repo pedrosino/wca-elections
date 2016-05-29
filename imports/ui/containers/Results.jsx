@@ -1,42 +1,27 @@
 import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import ResultsPage from '/imports/ui/pages/Results.jsx';
+import candidates from '/imports/candidates';
+import { Votes } from '/imports/collections';
+import _ from 'lodash';
 
 export default Results = createContainer(props => {
-  const votesHandle = Meteor.subscribe('myVotes');
+  const resultsHandle = Meteor.subscribe('results');
 
-  let results = [
-    {
-      name: 'Caleb Vacuum',
-      neutral: 0,
-      no: 8,
-      yes: 9,
-    },
-    {
-      name: 'James LaChance',
-      neutral: 7,
-      no: 2,
-      percent: 80,
-    },
-    {
-      name: 'Jeremy Fleischman',
-      neutral: 0,
+  let votes = Votes.find({}).fetch().filter(vote => vote.isComplete());
+
+  let results = candidates.map(candidate => {
+    // We start with some initial zeroed data because countBy won't be aware
+    // a particular preference exists because nobody expressed it.
+    let emptyPreferences = {
+      name: candidate.name,
       no: 0,
-      yes: 17,
-    },
-    {
-      name: 'Keaton Ellis',
-      neutral: 5,
-      no: 9,
-      yes: 3,
-    },
-    {
-      name: 'Kit Clement',
-      neutral: 7,
-      no: 5,
-      yes: 5,
-    },
-  ];
+      neutral: 0,
+      yes: 0,
+    };
+
+    return _.assignIn(emptyPreferences, _.countBy(votes, vote => vote.votes[candidate.id]));
+  });
 
   return {
     results,

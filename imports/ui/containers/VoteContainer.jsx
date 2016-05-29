@@ -1,7 +1,7 @@
 import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import CandidateList from '../components/candidate-list';
-import { Votes } from '/imports/collections';
+import { Vote, Votes } from '/imports/collections';
 import { throwUnlessUser, canVote } from '/imports/permissions';
 
 import Candidates from '../../candidates';
@@ -16,7 +16,7 @@ class VotePage extends React.Component {
   }
 
   render() {
-    let { user, votes } = this.props;
+    let { user, vote } = this.props;
 
     if(!user) {
       return (
@@ -32,13 +32,26 @@ class VotePage extends React.Component {
       );
     } else {
       let wcaUser = user.services.worldcubeassociation;
+      let messages = [];
+
+      if (!vote.isComplete()) {
+        messages.push({
+          type: 'danger',
+          text: 'You have not voted for all candidates. Finish doing this because you suck.'
+        });
+      }
+
       return (
         <div className="container">
           Hello, {wcaUser.name}!
           Your WCA ID is {wcaUser.wca_id}.
-
+          {messages.map((message, index) =>
+            <div key={index} className={`alert alert-${message.type}`}>
+              {message.text}
+            </div>
+          )}
           <h2>Candidates:</h2>
-          <CandidateList votes={votes} candidates={Candidates}/>
+          <CandidateList votes={vote.votes} candidates={Candidates}/>
         </div>
       );
     }
@@ -48,13 +61,19 @@ class VotePage extends React.Component {
 export default VoteContainer = createContainer(props => {
   const votesHandle = Meteor.subscribe('myVotes');
   const loading = !votesHandle.ready();
-  let userVotes = Meteor.userId() ? Votes.findOne({userId: Meteor.userId()}) : undefined;
- 
-  let votes = userVotes ? userVotes.votes : [];
+  let vote;
+
+  if (Meteor.userId()) {
+    vote = Votes.findOne({userId: Meteor.userId()})
+  }
+
+  if (!vote) {
+    vote = new Vote();
+  }
 
   return {
     loading,
-    votes: votes,
+    vote,
     user: Meteor.user(),
   };
 }, VotePage);

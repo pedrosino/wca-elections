@@ -1,4 +1,5 @@
 import { Votes } from '/imports/collections';
+import { throwUnlessUser, canViewResults } from '/imports/permissions';
 
 Meteor.publish(null, function() {
   if(!this.userId) {
@@ -19,4 +20,10 @@ Meteor.publish('myVotes', function() {
     return [];
   }
   return Votes.find({ userId: this.userId });
+});
+
+Meteor.publish('results', function() {
+  throwUnlessUser(canViewResults, this.userId);
+
+  return Votes.find({});
 });

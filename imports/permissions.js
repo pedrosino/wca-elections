@@ -10,6 +10,10 @@ export const canVote = function(user) {
   );
 };
 
+export const canViewResults = function(user) {
+  return true;
+}
+
 export const throwUnlessUser = function(canUserDoFunc, userId) {
   let user = Meteor.users.findOne(userId);
 
