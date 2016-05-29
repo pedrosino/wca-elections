@@ -28,5 +28,5 @@ Meteor.publish('results', function() {
     return [];
   }
 
-  return Votes.find({});
+  return Votes.find({}, { fields: { votes: 1 } });
 });
