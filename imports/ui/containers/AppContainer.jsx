@@ -3,7 +3,7 @@ import { IndexLink, Link } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import BlazeToReact from '/imports/ui/BlazeToReact';
-import NavTab from '/imports/ui/NavTab';
+import NavTab from '/imports/ui/components/NavTab';
 
 const App = ({children}) => (
   <div>
