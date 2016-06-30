@@ -25,10 +25,17 @@ export const canVote = function(user) {
 };
 
 export const canViewResults = function(user) {
-  if (!user) {
+  if (!electionHasEnded()) {
     return false;
   }
-  return electionHasEnded();
+
+  let wca = user.services.worldcubeassociation;
+  return (
+    wca.delegate_status === "board_member" ||
+    wca.delegate_status === "senior_delegate" ||
+    wca.delegate_status === "delegate" ||
+    wca.teams.some(team => team.leader)
+  );
 }
 
 export const throwUnlessUser = function(canUserDoFunc, userId) {
