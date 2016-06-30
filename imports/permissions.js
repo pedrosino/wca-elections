@@ -25,6 +25,9 @@ export const canVote = function(user) {
 };
 
 export const canViewResults = function(user) {
+  if (!user) {
+    return false;
+  }
   return electionHasEnded();
 }
 
