@@ -43,7 +43,7 @@ class VotePage extends React.Component {
       } else {
         messages.push({
           type: 'success',
-          text: 'Your vote has been stored in our database! For your convinience, you can change your vote until the election deadline has passed.',
+          text: 'Your vote has been stored in our database! For your convenience, you can change your vote until the election deadline has passed.',
         });
       }
 
